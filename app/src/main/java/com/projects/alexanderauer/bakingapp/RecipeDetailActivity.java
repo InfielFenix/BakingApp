@@ -16,10 +16,6 @@ import com.projects.alexanderauer.bakingapp.entity.Step;
 
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeDetailFragment.OnRecipeStepClickListener, StepDetailFragment.OnStepButtonClickListener {
 
-    public final static int REQUEST_CODE_STEP_DETAIL = 0,
-            RESULT_CODE_BTN_PREV = 0,
-            RESULT_CODE_BTN_NEXT = 1;
-
     Recipe mRecipe = null;
 
     public static RecipeDetailActivity mActivity;
@@ -34,8 +30,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
         // activate the back arrow in the upper left corner of the app
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (getIntent().hasExtra(getString(R.string.extra_recipe)))
+        if (getIntent().hasExtra(getString(R.string.extra_recipe))) {
             mRecipe = getIntent().getParcelableExtra(getString(R.string.extra_recipe));
+            onRecipeStepClicked(mRecipe.getSteps().get(0));
+        }
     }
 
     @Override
@@ -63,15 +61,14 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
 
             stepDetailIntent.putExtra(getString(R.string.extra_step), step);
 
-            startActivityForResult(stepDetailIntent, REQUEST_CODE_STEP_DETAIL);
+            startActivity(stepDetailIntent);
         }
     }
 
     @Override
     public void onStepButtonClickedPrev(Step step) {
         if (step != null && mRecipe != null) {
-           // onRecipeStepClicked(mRecipe.getSteps().get(step.getId() - 1));
-            Step newStep = null;
+            Step newStep;
 
             if (step.getId() == 0)
                 newStep = mRecipe.getSteps().get(mRecipe.getSteps().size()-1);
@@ -85,8 +82,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     @Override
     public void onStepButtonClickedNext(Step step) {
         if (step != null && mRecipe != null) {
-            //onRecipeStepClicked(mRecipe.getSteps().get(step.getId() + 1));
-            Step newStep = null;
+            Step newStep;
 
             if (step.getId() == mRecipe.getSteps().size()-1)
                 newStep = mRecipe.getSteps().get(0);

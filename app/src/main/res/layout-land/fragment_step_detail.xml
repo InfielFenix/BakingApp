@@ -7,15 +7,15 @@
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/playerView"
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_normal"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/margin_normal"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/margin_normal"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="@dimen/margin_normal" />
 
     <TextView
         android:id="@+id/step_detail_description"
@@ -23,19 +23,19 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/playerView"
         android:text=""
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/margin_normal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@+id/playerView"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="@dimen/margin_normal" />
 
     <Button
         android:text="Prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_prev_step"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/margin_normal"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_normal"
         app:layout_constraintTop_toBottomOf="@+id/step_detail_description" />
 
     <Button
@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_next_step"
         app:layout_constraintTop_toBottomOf="@+id/step_detail_description"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/margin_normal"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="@dimen/margin_normal" />
 
 </android.support.constraint.ConstraintLayout>

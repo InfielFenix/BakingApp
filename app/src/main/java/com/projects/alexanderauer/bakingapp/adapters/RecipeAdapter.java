@@ -2,15 +2,18 @@ package com.projects.alexanderauer.bakingapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.projects.alexanderauer.bakingapp.R;
 import com.projects.alexanderauer.bakingapp.RecipeDetailActivity;
 import com.projects.alexanderauer.bakingapp.entity.Recipe;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -33,6 +36,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         public final View mView;
         public final TextView mRecipeName, mServings, mSteps;
+        public final ImageView mRecipeImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -40,6 +44,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             mContext = itemView.getContext();
 
             mView = itemView;
+            mRecipeImage = (ImageView) itemView.findViewById(R.id.recipe_image);
             mRecipeName = (TextView) itemView.findViewById(R.id.recipe_name);
             mServings = (TextView) itemView.findViewById(R.id.servings);
             mSteps = (TextView) itemView.findViewById(R.id.steps);
@@ -67,6 +72,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mBoundRecipe = mRecipes.get(position);
+
+        if(!holder.mBoundRecipe.getImagePath().equals("")) {
+            Picasso.with(holder.mContext)
+                    .load(holder.mBoundRecipe.getImagePath() + holder.mContext.getString(R.string.recipe_image_size))
+                    .into(holder.mRecipeImage);
+        }
         holder.mRecipeName.setText(holder.mBoundRecipe.getName());
         holder.mServings.setText(Integer.toString(holder.mBoundRecipe.getServings()) + " " + holder.mView.getContext().getString(R.string.servings));
         holder.mSteps.setText(Integer.toString(holder.mBoundRecipe.getSteps().size()) + " " + holder.mView.getContext().getString(R.string.steps));

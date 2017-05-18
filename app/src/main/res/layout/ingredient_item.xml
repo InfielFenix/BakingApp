@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:id="@+id/ingredient"
-        android:paddingLeft="16dp"
-        android:paddingBottom="8dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="8dp" />
+        android:paddingLeft="@dimen/margin_normal"
+        android:paddingBottom="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_normal"
+        android:paddingTop="@dimen/margin_small" />
 </LinearLayout>

@@ -17,6 +17,7 @@ import com.projects.alexanderauer.bakingapp.adapters.IngredientRecyclerAdapter;
 import com.projects.alexanderauer.bakingapp.adapters.StepRecyclerAdapter;
 import com.projects.alexanderauer.bakingapp.entity.Recipe;
 import com.projects.alexanderauer.bakingapp.entity.Step;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Alex on 18.05.2017.
@@ -66,6 +67,11 @@ public class RecipeDetailFragment extends Fragment {
             tvRecipeName.setText(recipe.getName());
 
             ImageView ivRecipeImage = (ImageView) rootView.findViewById(R.id.recipe_detail_image);
+            if(!recipe.getImagePath().equals("")) {
+                Picasso.with(getContext())
+                        .load(recipe.getImagePath() + getContext().getString(R.string.recipe_image_size))
+                        .into(ivRecipeImage);
+            }
 
             RecyclerView rvIngredients = (RecyclerView) rootView.findViewById(R.id.ingredients);
             if (recipe.getIngredients() != null && recipe.getIngredients().size() > 0){

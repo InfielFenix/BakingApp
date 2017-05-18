@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.projects.alexanderauer.bakingapp.adapters.RecipeAdapter;
 import com.projects.alexanderauer.bakingapp.entity.Recipe;
 
@@ -64,12 +63,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         return rootView;
     }
 
-    private class RecipeCollection {
-        @SerializedName("results")
-        ArrayList<Recipe> recipes;
-    }
-
-
     @Override
     public Loader<ArrayList<Recipe>> onCreateLoader(int id, Bundle args) {
         return new AsyncTaskLoader<ArrayList<Recipe>>(getActivity()) {
@@ -101,7 +94,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                     InputStreamReader reader = new InputStreamReader(urlConnection.getInputStream());
 
                     Recipe[] recipeArray = new Gson().fromJson(reader, Recipe[].class);
-                    recipeBuffer = new ArrayList<Recipe>(Arrays.asList(recipeArray));
+                    recipeBuffer = new ArrayList<>(Arrays.asList(recipeArray));
 
                     return recipeBuffer;
                 } catch (MalformedURLException e) {

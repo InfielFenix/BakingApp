@@ -10,7 +10,7 @@
     <fragment
         android:id="@+id/recipe_master_fragment"
         android:name="com.projects.alexanderauer.bakingapp.RecipeDetailFragment"
-        android:layout_width="400dp"
+        android:layout_width="@dimen/recipe_master_fragment_width"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_recipe_detail" />
     
