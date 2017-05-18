@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="com.projects.alexanderauer.bakingapp.RecipeDetailActivity"/>
+
+    <fragment
+        android:id="@+id/recipe_master_fragment"
+        android:name="com.projects.alexanderauer.bakingapp.RecipeDetailFragment"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_recipe_detail" />
+    
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray"/>
+
+    <fragment
+        android:id="@+id/recipe_detail_fragment"
+        android:name="com.projects.alexanderauer.bakingapp.StepDetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_step_detail"/>
+
+</LinearLayout>
