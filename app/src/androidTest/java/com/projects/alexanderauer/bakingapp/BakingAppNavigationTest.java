@@ -18,10 +18,13 @@ import org.junit.runner.RunWith;
 
 /**
  * Created by Alex on 22.05.2017.
+ *
+ *  This test navigates threw the application and checks the data
+ *
  */
 
 @RunWith(AndroidJUnit4.class)
-public class BakingAppTests {
+public class BakingAppNavigationTest {
 
     static final String RECIPE_NAME = "Nutella Pie",
         RECIPE_STEP_DESCRIPTION= "Recipe Introduction";
