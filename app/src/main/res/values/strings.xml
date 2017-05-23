@@ -9,4 +9,7 @@
     <string name="extra_step">step_extra</string>
     <string name="ingredients">Ingredients</string>
     <string name="recipe_image_size">w500/</string>
+    <string name="appwidget_text">Recipes</string>
+    <string name="add_widget">Add widget</string>
+    <string name="current_step_extra">extra_current_step</string>
 </resources>

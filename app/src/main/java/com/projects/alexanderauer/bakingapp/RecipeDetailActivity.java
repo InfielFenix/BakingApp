@@ -18,12 +18,17 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
 
     Recipe mRecipe = null;
 
+    int mCurrentStep = 0;
+
     public static RecipeDetailActivity mActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(getString(R.string.current_step_extra)))
+            mCurrentStep = savedInstanceState.getInt(getString(R.string.current_step_extra));
 
         mActivity = this;
 
@@ -32,7 +37,10 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
 
         if (getIntent().hasExtra(getString(R.string.extra_recipe))) {
             mRecipe = getIntent().getParcelableExtra(getString(R.string.extra_recipe));
-            onRecipeStepClicked(mRecipe.getSteps().get(0));
+
+            // automatically select current item when in two pane mode
+            if(getResources().getBoolean(R.bool.isTablet))
+                onRecipeStepClicked(mRecipe.getSteps().get(mCurrentStep));
         }
     }
 
@@ -49,12 +57,21 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // store data
+        outState.putInt(getString(R.string.current_step_extra), mCurrentStep);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onRecipeStepClicked(Step step) {
         if (getResources().getBoolean(R.bool.isTablet)) {
+            mCurrentStep = step.getId();
             StepDetailFragment stepDetailFragment = new StepDetailFragment();
             stepDetailFragment.setData(step);
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.recipe_detail_fragment, stepDetailFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment, stepDetailFragment).commit();
         } else {
             // create intent, put the step data object into its extras and start the activity
             Intent stepDetailIntent = new Intent(this, StepDetailActivity.class);
@@ -68,35 +85,24 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     @Override
     public void onStepButtonClickedPrev(Step step) {
         if (step != null && mRecipe != null) {
-            Step newStep;
-
             if (step.getId() == 0)
-                newStep = mRecipe.getSteps().get(mRecipe.getSteps().size()-1);
+                mCurrentStep = mRecipe.getSteps().size() - 1;
             else
-                newStep = mRecipe.getSteps().get(step.getId() - 1);
+                mCurrentStep = step.getId() - 1;
 
-            onRecipeStepClicked(newStep);
+            onRecipeStepClicked(mRecipe.getSteps().get(mCurrentStep));
         }
     }
 
     @Override
     public void onStepButtonClickedNext(Step step) {
         if (step != null && mRecipe != null) {
-            Step newStep;
-
             if (step.getId() == mRecipe.getSteps().size()-1)
-                newStep = mRecipe.getSteps().get(0);
+                mCurrentStep = 0;
             else
-                newStep = mRecipe.getSteps().get(step.getId() + 1);
+                mCurrentStep = step.getId() + 1;
 
-            onRecipeStepClicked(newStep);
+            onRecipeStepClicked(mRecipe.getSteps().get(mCurrentStep));
         }
-    }
-
-    private void replaceStepDetail(Step step){
-        StepDetailFragment stepDetailFragment = new StepDetailFragment();
-        stepDetailFragment.setData(step);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.recipe_detail_fragment, stepDetailFragment).commit();
     }
 }

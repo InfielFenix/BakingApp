@@ -29,7 +29,7 @@ import com.projects.alexanderauer.bakingapp.entity.Step;
  * Created by Alex on 18.05.2017.
  */
 
-public class StepDetailFragment extends Fragment {
+public class StepDetailFragment extends Fragment{
 
     OnStepButtonClickListener mCallback;
 
@@ -57,7 +57,7 @@ public class StepDetailFragment extends Fragment {
 
         Step step = null;
         if (getActivity().getIntent().hasExtra(getString(R.string.extra_step)))
-            // get movie object from extras
+            // get step object from extras
             step = getActivity().getIntent().getParcelableExtra(getString(R.string.extra_step));
         else if (mStep != null)
             step = mStep;
@@ -128,4 +128,21 @@ public class StepDetailFragment extends Fragment {
             mExoPlayer.setPlayWhenReady(true);
         }
     }
+
+    private void releasePlayer() {
+        if(mExoPlayer != null) {
+            mExoPlayer.stop();
+            mExoPlayer.release();
+            mExoPlayer = null;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        // release the player when view gets destroyed
+        releasePlayer();
+    }
+
 }

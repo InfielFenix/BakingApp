@@ -4,12 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context="com.projects.alexanderauer.bakingapp.RecipeDetailActivity"/>
 
     <fragment
-        android:id="@+id/recipe_master_fragment"
-        android:name="com.projects.alexanderauer.bakingapp.RecipeDetailFragment"
+        android:id="@+id/master_fragment"
+        class="com.projects.alexanderauer.bakingapp.RecipeDetailFragment"
         android:layout_width="@dimen/recipe_master_fragment_width"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_recipe_detail" />
@@ -19,11 +17,10 @@
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray"/>
 
-    <fragment
-        android:id="@+id/recipe_detail_fragment"
-        android:name="com.projects.alexanderauer.bakingapp.StepDetailFragment"
+    <FrameLayout
+        android:id="@+id/detail_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_step_detail"/>
+        tools:layout="@layout/fragment_step_detail" />
 
 </LinearLayout>
